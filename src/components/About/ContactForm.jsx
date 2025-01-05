@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Send } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -10,8 +12,22 @@ export default function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted:', formData);
+  
+    emailjs.send(
+        import.meta.env.VITE_EMAIL_SERVICE_ID,
+        import.meta.env.VITE_EMAIL_TEMPLATE_ID,
+        formData,
+        import.meta.env.VITE_EMAIL_PUBLIC_KEY
+      )
+    .then((response) => {
+      console.log('SUCCESS!', response.status, response.text);
+      alert('Message sent successfully!');
+      setFormData({ name: '', email: '', message: '' });
+    })
+    .catch((err) => {
+      console.error('FAILED...', err);
+      alert('Failed to send message. Please try again.');
+    });
   };
 
   const handleChange = (e) => {
