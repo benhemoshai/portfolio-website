@@ -1,18 +1,4 @@
-const skills = [
-  {
-    category: "Frontend",
-    items: ["React", "Vue.js", "TypeScript", "Tailwind CSS", "HTML5/CSS3"],
-  },
-  {
-    category: "Backend",
-    items: ["Node.js", "Python", "Java", "PostgreSQL", "MongoDB"],
-  },
-  {
-    category: "Tools & Others",
-    items: ["Git", "Docker", "AWS", "Figma", "Jest"],
-  },
-];
-
+import skills from "../data/skills"; 
 export default function Skills() {
   return (
     <section id="skills" className="py-16">
